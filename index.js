@@ -6,9 +6,12 @@ import cors from 'cors';
 
 const app = express();
 
+// Middlewares
 dotenv.config();
 app.use(cors())
 app.use(express.json())
+
+// TODO: DB Connection
 try {
     await mongoose.connect(process.env.MONGODB_LINK)      // Connecting db
     console.log('DB is Ready')
@@ -18,10 +21,10 @@ try {
 
 
 // * Routes ...
-app.use('/quotes', quoteRouter)
+app.use('/api/quotes', quoteRouter)
 
 
-app.listen(5000, () => {        // Server LISTEN
+app.listen(process.env.PORT, () => {        // Server LISTEN
     console.log(`Server is Live ... PORT: ${process.env.PORT}`)
 })
 
